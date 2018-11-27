@@ -14,8 +14,6 @@ export class AuthorsTable extends React.Component {
     this.setState({isLoading: true});
     const data = await dataLoader('authors', 'GET');
 
-    console.log(data);
-
     this.initTableItems(data);
   };
 
