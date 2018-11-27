@@ -1,4 +1,4 @@
-const HOST_NAME = 'http://localhost:4000/';
+const HOST_NAME = 'http://localhost:3000/';
 
 export const dataLoader = (path, action = 'GET', data = null) => {
   const url = HOST_NAME + path;
