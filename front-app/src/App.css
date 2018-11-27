@@ -6,7 +6,7 @@
 
 header {
     width: 100%;
-    height: 10vh;
+    /*height: 10vh;*/
     background-color: burlywood;
     margin: 0;
     padding: 0;
@@ -18,9 +18,42 @@ main {
     background-color: aliceblue;
     margin: 0;
     padding: 0;
-    text-align: center;
+}
+
+.test-books-table {
+    height: 400px;
+    background-color: brown;
+    overflow: scroll;
+}
+
+.test-authors-table {
+    height: 400px;
+    background-color: brown;
+}
+
+.test-search-table {
+    height: 400px;
+    background-color: brown;
 }
 
 h1 {
     padding: 10px;
+}
+
+li {
+    list-style-type: none;
+    padding:0;
+    margin:0;
+}
+
+.books-table-item {
+    margin: 2px;
+    background-color: bisque;
+    width: 100%;
+}
+
+.books-table-item li {
+    display: inline-block;
+    width: 100px;
+    margin: 10px 40px 10px 0;
 }
