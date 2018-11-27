@@ -1,15 +1,13 @@
 import React from 'react';
 
-export class BooksTableItem extends React.Component {
-  render() {
-    return (
-      <ul className={'books-table-item'}>
-        <li>{this.props.data.title}</li>
-        <li>{this.props.data.author.name}</li>
-        <li>{this.props.data.language}</li>
-        <li>{this.props.data.genre}</li>
-        <li>{this.props.data.rating}</li>
-      </ul>
-    );
-  }
-}
+export const BooksTableItem = (props) => {
+  return (
+    <ul className={'books-table-item'}>
+      <li>{props.data.title}</li>
+      <li>{props.data.author.name}</li>
+      <li>{props.data.language}</li>
+      <li>{props.data.genre}</li>
+      <li>{props.data.rating}</li>
+    </ul>
+  );
+};

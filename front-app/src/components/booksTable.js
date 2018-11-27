@@ -14,10 +14,10 @@ export class BooksTable extends React.Component {
     this.setState({isLoading: true});
     const data = await dataLoader('books', 'GET');
 
-    this.initBooksTableItems(data);
+    this.initTableItems(data);
   };
 
-  initBooksTableItems = (data) => {
+  initTableItems = (data) => {
     const listItems = data.map((element) =>
       <li key={element.id}><BooksTableItem data={element}/></li>
     );
