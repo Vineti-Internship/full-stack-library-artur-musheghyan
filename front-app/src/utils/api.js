@@ -7,9 +7,13 @@ export const dataLoader = (path, action = 'GET', data = null) => {
 };
 
 const postData = async (url, data) => {
+  console.log(url);
   try {
     const response = await fetch(url, {
       method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify(data)
     });
 
