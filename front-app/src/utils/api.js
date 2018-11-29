@@ -1,4 +1,5 @@
 const HOST_NAME = 'http://localhost:3000/';
+export const EVENT_DATA_SHOULD_UPDATE = 'shouldUpdate';
 
 export const dataLoader = (path, action = 'GET', data = null) => {
   const url = HOST_NAME + path;
@@ -20,6 +21,7 @@ const postData = async (url, data) => {
     if(response.ok) {
       const jsonResponse = await response.json();
 
+      document.dispatchEvent(new Event(EVENT_DATA_SHOULD_UPDATE));
       return jsonResponse;
     } else {
       throw new Error('Failed!');

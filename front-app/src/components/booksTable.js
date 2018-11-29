@@ -1,7 +1,7 @@
 import React from 'react';
 import {BooksTableItem} from "./booksTableItem";
 import {LoadingBar} from "./loadingBar";
-import {dataLoader} from "../utils/api";
+import {dataLoader, EVENT_DATA_SHOULD_UPDATE} from "../utils/api";
 
 export class BooksTable extends React.Component {
 
@@ -9,6 +9,11 @@ export class BooksTable extends React.Component {
     isLoading: true,
     listItems: {}
   };
+
+  constructor(props){
+    super(props);
+    document.addEventListener(EVENT_DATA_SHOULD_UPDATE, this.loadData);
+  }
 
   loadData = async () => {
     this.setState({isLoading: true});

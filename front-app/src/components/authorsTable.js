@@ -1,5 +1,5 @@
 import React from 'react';
-import {dataLoader} from "../utils/api";
+import {dataLoader, EVENT_DATA_SHOULD_UPDATE} from "../utils/api";
 import {LoadingBar} from "./loadingBar";
 import {AuthorsTableItem} from "./authorsTableItem";
 
@@ -9,6 +9,11 @@ export class AuthorsTable extends React.Component {
     isLoading: true,
     data: {}
   };
+
+  constructor(props){
+    super(props);
+    document.addEventListener(EVENT_DATA_SHOULD_UPDATE, this.loadData);
+  }
 
   loadData = async () => {
     this.setState({isLoading: true});
