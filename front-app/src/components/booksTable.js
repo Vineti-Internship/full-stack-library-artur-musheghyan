@@ -7,7 +7,7 @@ export class BooksTable extends React.Component {
 
   state = {
     isLoading: true,
-    data: {}
+    listItems: {}
   };
 
   loadData = async () => {

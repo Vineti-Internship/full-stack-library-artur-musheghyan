@@ -1,5 +1,5 @@
 import React from 'react';
-import {showAddBookPopup} from "./popups/popupAddElement";
+import {showAddBookPopup} from "./popups/popupAddBook";
 
 export class AuthorsTableItem extends React.Component{
   render() {
