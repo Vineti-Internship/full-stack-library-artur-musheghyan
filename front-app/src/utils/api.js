@@ -12,7 +12,7 @@ export const dataLoader = (path, action = 'GET', data = null, item = null) => {
     case 'DELETE':
       return deleteData(url, item);
     case 'PATCH':
-      return putData(url, data, item);
+      return patchData(url, data, item);
   }
 };
 
@@ -79,7 +79,7 @@ const deleteData = async (url, item) => {
   }
 };
 
-const putData = async (url, data, item) => {
+const patchData = async (url, data, item) => {
   url = url + '/' + item;
   try {
     const response = await fetch(url, {
