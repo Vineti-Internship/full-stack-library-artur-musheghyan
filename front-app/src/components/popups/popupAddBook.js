@@ -44,11 +44,6 @@ const addBookClickHandler = () => {
 
   dataLoader('books', 'POST', data);
   closePopup();
-  updateContent();
-};
-
-const updateContent = () =>{
-  dispatchEvent(new Event("update_books_content"));
 };
 
 const closePopup = () => {
