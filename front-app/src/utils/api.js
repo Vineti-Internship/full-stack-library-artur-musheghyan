@@ -11,6 +11,8 @@ export const dataLoader = (path, action = 'GET', data = null, item = null) => {
       return postData(url, data);
     case 'DELETE':
       return deleteData(url, item);
+    case 'PATCH':
+      return putData(url, data, item);
   }
 };
 
@@ -58,7 +60,10 @@ const deleteData = async (url, item) => {
   url = url + '/' + item;
   try {
     const response = await fetch(url, {
-      method: 'delete'
+      method: 'delete',
+      headers: {
+        "Content-Type": "application/json"
+      }
     });
 
     if (response.ok) {
@@ -66,6 +71,31 @@ const deleteData = async (url, item) => {
       document.dispatchEvent(new Event(EVENT_DATA_SHOULD_UPDATE));
 
       // return jsonResponse;
+    } else {
+      throw new Error('Failed!');
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const putData = async (url, data, item) => {
+  url = url + '/' + item;
+  console.log(url);
+  try {
+    const response = await fetch(url, {
+      method: 'PATCH',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
+
+    if (response.ok) {
+      const jsonResponse = await response.json();
+
+      document.dispatchEvent(new Event(EVENT_DATA_SHOULD_UPDATE));
+      return jsonResponse;
     } else {
       throw new Error('Failed!');
     }
