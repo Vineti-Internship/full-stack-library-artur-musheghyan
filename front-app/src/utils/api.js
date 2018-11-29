@@ -81,7 +81,6 @@ const deleteData = async (url, item) => {
 
 const putData = async (url, data, item) => {
   url = url + '/' + item;
-  console.log(url);
   try {
     const response = await fetch(url, {
       method: 'PATCH',
