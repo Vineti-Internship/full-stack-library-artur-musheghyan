@@ -1,10 +1,17 @@
 const HOST_NAME = 'http://localhost:3000/';
 export const EVENT_DATA_SHOULD_UPDATE = 'shouldUpdate';
 
-export const dataLoader = (path, action = 'GET', data = null) => {
+export const dataLoader = (path, action = 'GET', data = null, item = null) => {
   const url = HOST_NAME + path;
 
-  return (action === 'GET') ? getData(url) : postData(url, data);
+  switch (action) {
+    case 'GET':
+      return getData(url);
+    case 'POST':
+      return postData(url, data);
+    case 'DELETE':
+      return deleteData(url, item);
+  }
 };
 
 const postData = async (url, data) => {
@@ -18,7 +25,7 @@ const postData = async (url, data) => {
       body: JSON.stringify(data)
     });
 
-    if(response.ok) {
+    if (response.ok) {
       const jsonResponse = await response.json();
 
       document.dispatchEvent(new Event(EVENT_DATA_SHOULD_UPDATE));
@@ -39,6 +46,26 @@ const getData = async (url) => {
       const jsonResponse = await response.json();
 
       return jsonResponse;
+    } else {
+      throw new Error('Failed!');
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const deleteData = async (url, item) => {
+  url = url + '/' + item;
+  try {
+    const response = await fetch(url, {
+      method: 'delete'
+    });
+
+    if (response.ok) {
+      // const jsonResponse = await response.json();
+      document.dispatchEvent(new Event(EVENT_DATA_SHOULD_UPDATE));
+
+      // return jsonResponse;
     } else {
       throw new Error('Failed!');
     }
