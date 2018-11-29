@@ -1,5 +1,6 @@
 import React from 'react';
 import {dataLoader} from "../utils/api";
+import {showEditBookPopup} from "./popups/popupEditBook";
 
 export class BooksTableItem extends React.Component {
   render() {
@@ -11,12 +12,17 @@ export class BooksTableItem extends React.Component {
         <li>{this.props.data.genre}</li>
         <li>{this.props.data.rating}</li>
         <button onClick={this.deleteClickHandler}>Delete</button>
+        <button onClick={this.editClickHandler}>Edit</button>
       </ul>
     );
   }
 
   deleteClickHandler = () => {
     dataLoader('books', 'DELETE', null, this.props.data.id);
+  };
+
+  editClickHandler = () => {
+    showEditBookPopup(this.props.data.id);
   };
 }
 
