@@ -7,7 +7,7 @@ export class BooksTable extends React.Component {
 
   state = {
     isLoading: true,
-    listItems: {}
+    listItems: {},
   };
 
   constructor(props){
@@ -18,6 +18,8 @@ export class BooksTable extends React.Component {
   loadData = async () => {
     this.setState({isLoading: true});
     const data = await dataLoader('books', 'GET');
+
+    this.props.sendDataUp(data);
 
     this.initTableItems(data);
   };
