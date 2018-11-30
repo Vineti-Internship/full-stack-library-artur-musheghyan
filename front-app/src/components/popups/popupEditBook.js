@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from "react-dom";
 import {dataLoader} from "../../utils/api";
+import {ThemeContext} from "../../context/theme_context";
 
 let bookId;
 
@@ -12,22 +13,36 @@ export const showEditBookPopup = (id) => {
 
 const PopupEditBook = () => {
   return (
-    <div className="popup">
-      <div className="popup-content">
-        <h2>Edit Book</h2>
+    <ThemeContext.Consumer>
+      {context => (
+        <div className="popup">
+          <div style={{backgroundColor: context.colorA}} className="popup-content">
+            <h2>Edit Book</h2>
 
-        <form id='editBookForm'>
-          Title <input type="text" name="title"/><br/>
-          Language <input type="text" name="language"/><br/>
-          Genre <input type="text" name="genre"/><br/>
-          Publisher <input type="text" name="publisher"/><br/>
-          Publication Date <input type="text" name="publication_data"/><br/>
-          Rating <input type="text" name="rating"/><br/>
-        </form>
-        <button onClick={addBookClickHandler}>Edit</button>
-        <button onClick={closePopup}>Close</button>
-      </div>
-    </div>
+            <form id='editBookForm'>
+              Title <input style={{color: context.textColor, backgroundColor: context.buttonColor}} type="text"
+                           name="title"/><br/>
+              Language <input style={{color: context.textColor, backgroundColor: context.buttonColor}} type="text"
+                              name="language"/><br/>
+              Genre <input style={{color: context.textColor, backgroundColor: context.buttonColor}} type="text"
+                           name="genre"/><br/>
+              Publisher <input style={{color: context.textColor, backgroundColor: context.buttonColor}} type="text"
+                               name="publisher"/><br/>
+              Publication Date <input style={{color: context.textColor, backgroundColor: context.buttonColor}}
+                                      type="text" name="publication_data"/><br/>
+              Rating <input style={{color: context.textColor, backgroundColor: context.buttonColor}} type="text"
+                            name="rating"/><br/>
+            </form>
+            <button style={{color: context.textColor, backgroundColor: context.buttonColor}}
+                    onClick={addBookClickHandler}>Edit
+            </button>
+            <button style={{color: context.textColor, backgroundColor: context.buttonColor}}
+                    onClick={closePopup}>Close
+            </button>
+          </div>
+        </div>
+      )}
+    </ThemeContext.Consumer>
   );
 };
 
@@ -44,7 +59,7 @@ const addBookClickHandler = () => {
   };
 
   for (let dataKey in data) {
-    if(data[dataKey] === ''){
+    if (data[dataKey] === '') {
       delete data[dataKey];
     }
   }

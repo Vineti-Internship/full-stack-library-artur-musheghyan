@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from "react-dom";
 import {dataLoader} from "../../utils/api";
+import {ThemeContext} from "../../context/theme_context";
 
 export const showAddAuthorPopup = () => {
   ReactDOM.render(<PopupAddAuthor/>, document.getElementById('popupContainer'));
@@ -8,19 +9,29 @@ export const showAddAuthorPopup = () => {
 
 const PopupAddAuthor = () => {
   return (
-    <div className="popup">
-      <div className="popup-content">
-        <h2>Add Book</h2>
+    <ThemeContext.Consumer>
+      {context => (
+        <div className="popup">
+          <div style={{backgroundColor: context.colorA}} className="popup-content">
+            <h2>Add Book</h2>
 
-        <form id='addBookForm'>
-          Name <input type="text" name="name"/><br/>
-          Nationality <input type="text" name="nationality"/><br/>
-        </form>
+            <form id='addBookForm'>
+              Name <input style={{color: context.textColor, backgroundColor: context.buttonColor}} type="text"
+                          name="name"/><br/>
+              Nationality <input style={{color: context.textColor, backgroundColor: context.buttonColor}} type="text"
+                                 name="nationality"/><br/>
+            </form>
 
-        <button onClick={addAuthorClickHandler}>Add</button>
-        <button onClick={closePopup}>close</button>
-      </div>
-    </div>
+            <button style={{color: context.textColor, backgroundColor: context.buttonColor}}
+                    onClick={addAuthorClickHandler}>Add
+            </button>
+            <button style={{color: context.textColor, backgroundColor: context.buttonColor}}
+                    onClick={closePopup}>close
+            </button>
+          </div>
+        </div>
+      )}
+    </ThemeContext.Consumer>
   );
 };
 

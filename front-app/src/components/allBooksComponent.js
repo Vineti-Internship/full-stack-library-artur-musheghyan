@@ -1,6 +1,7 @@
 import React from 'react';
 import {BooksTable} from "./booksTable";
 import {getSearchResult} from "../utils/searcheController";
+import {ThemeContext} from "../context/theme_context";
 
 export class AllBookComponent extends React.Component {
 
@@ -13,12 +14,16 @@ export class AllBookComponent extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
-        <h2>All Books</h2>
-        <input ref={this.searchInput}/>
-        <button onClick={this.searchButtonClickHandler}>search</button>
-        <BooksTable ref={this.booksTable} sendDataUp={this.getBooksData}/>
-      </React.Fragment>
+      <ThemeContext.Consumer>
+        {context => (
+          <React.Fragment>
+            <h2>All Books</h2>
+            <input style={{color: context.textColor, backgroundColor: context.buttonColor}} ref={this.searchInput}/>
+            <button style={{color: context.textColor, backgroundColor: context.buttonColor}} onClick={this.searchButtonClickHandler}>search</button>
+            <BooksTable ref={this.booksTable} sendDataUp={this.getBooksData}/>
+          </React.Fragment>
+        )}
+      </ThemeContext.Consumer>
     );
   }
 
@@ -26,7 +31,7 @@ export class AllBookComponent extends React.Component {
     this.setState({data});
   };
 
-  searchButtonClickHandler = (event) => {
+  searchButtonClickHandler = () => {
     let result;
     const searchText = this.searchInput.current.value;
 

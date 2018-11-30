@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from "react-dom";
 import {dataLoader} from "../../utils/api";
+import {ThemeContext} from "../../context/theme_context";
 
 export const showAddBookPopup = (id) => {
   ReactDOM.render(<PopupAddBook authorId={id}/>, document.getElementById('popupContainer'));
@@ -8,24 +9,28 @@ export const showAddBookPopup = (id) => {
 
 const PopupAddBook = (props) => {
   return (
-    <div className="popup">
-      <div className="popup-content">
-        <h2>Add Book</h2>
+    <ThemeContext.Consumer>
+      {context => (
+        <div className="popup">
+          <div style={{backgroundColor: context.colorA}} className="popup-content">
+            <h2>Add Book</h2>
 
-        <form id='addBookForm'>
-          Title <input type="text" name="title"/><br/>
-          Language <input type="text" name="language"/><br/>
-          Genre <input type="text" name="genre"/><br/>
-          Publisher <input type="text" name="publisher"/><br/>
-          Publication Date <input type="text" name="publication_data"/><br/>
-          Rating <input type="text" name="rating"/><br/>
-          Author ID <input type="text" name="author_id"
-                           readOnly="readOnly" value={props.authorId}/><br/>
-        </form>
-        <button onClick={addBookClickHandler}>Add</button>
-        <button onClick={closePopup}>close</button>
-      </div>
-    </div>
+            <form id='addBookForm'>
+              Title <input style={{color: context.textColor, backgroundColor: context.buttonColor}} type="text" name="title"/><br/>
+              Language <input style={{color: context.textColor, backgroundColor: context.buttonColor}} type="text" name="language"/><br/>
+              Genre <input style={{color: context.textColor, backgroundColor: context.buttonColor}} type="text" name="genre"/><br/>
+              Publisher <input style={{color: context.textColor, backgroundColor: context.buttonColor}} type="text" name="publisher"/><br/>
+              Publication Date <input style={{color: context.textColor, backgroundColor: context.buttonColor}} type="text" name="publication_data"/><br/>
+              Rating <input style={{color: context.textColor, backgroundColor: context.buttonColor}} type="text" name="rating"/><br/>
+              Author ID <input style={{color: context.textColor, backgroundColor: context.buttonColor}} type="text" name="author_id"
+                               readOnly="readOnly" value={props.authorId}/><br/>
+            </form>
+            <button style={{color: context.textColor, backgroundColor: context.buttonColor}} onClick={addBookClickHandler}>Add</button>
+            <button style={{color: context.textColor, backgroundColor: context.buttonColor}} onClick={closePopup}>close</button>
+          </div>
+        </div>
+      )}
+    </ThemeContext.Consumer>
   );
 };
 

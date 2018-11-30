@@ -2,6 +2,7 @@ import React from 'react';
 import {dataLoader, EVENT_DATA_SHOULD_UPDATE} from "../utils/api";
 import {LoadingBar} from "./loadingBar";
 import {AuthorsTableItem} from "./authorsTableItem";
+import {ThemeContext} from "../context/theme_context";
 
 export class AuthorsTable extends React.Component {
 
@@ -10,7 +11,7 @@ export class AuthorsTable extends React.Component {
     data: {}
   };
 
-  constructor(props){
+  constructor(props) {
     super(props);
     document.addEventListener(EVENT_DATA_SHOULD_UPDATE, this.loadData);
   }
@@ -42,7 +43,14 @@ export class AuthorsTable extends React.Component {
       view = <ul>{this.state.listItems}</ul>;
     }
 
-    return (<div className={'test-books-table'}>{view}</div>);
+    return (
+      <ThemeContext.Consumer>
+        {context => (
+          <div style={{backgroundColor: context.colorB}} className={'test-books-table'}>
+            {view}
+          </div>
+        )}
+      </ThemeContext.Consumer>);
   }
 
   componentDidMount() {
