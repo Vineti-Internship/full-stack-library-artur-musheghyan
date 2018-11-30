@@ -48,16 +48,19 @@ ul {
     height: 400px;
     background-color: brown;
     overflow: scroll;
+    overflow-x: hidden;
 }
 
 .test-authors-table {
     height: 400px;
     background-color: brown;
+    overflow-x: hidden;
 }
 
 .test-search-table {
     height: 400px;
     background-color: brown;
+    overflow-x: hidden;
 }
 
 .books-table-item {
@@ -71,7 +74,6 @@ ul {
     width: 100px;
     margin: 10px 40px 10px 0;
 }
-
 
 /*popup style.......................................................*/
 
