@@ -2,8 +2,15 @@ import React from 'react';
 import {BooksTable} from "./booksTable";
 import {getSearchResult} from "../utils/searcheController";
 import {ThemeContext} from "../context/theme_context";
+import {SearchTable, setSearchData} from "./searchTable";
 
 export class AllBookComponent extends React.Component {
+
+  state = {
+    isSearchView: false,
+    data: {},
+    searchData: []
+  };
 
   constructor(props) {
     super(props);
@@ -13,31 +20,43 @@ export class AllBookComponent extends React.Component {
   }
 
   render() {
+    let tableView;
+
+    if (this.state.isSearchView == true) {
+      tableView = <SearchTable data={this.state.searchData}/>;
+    } else {
+      tableView = <BooksTable ref={this.booksTable} sendDataUp={this.getBooksData}/>;
+    }
+
     return (
       <ThemeContext.Consumer>
         {context => (
           <React.Fragment>
             <h2>All Books</h2>
-            <input style={{color: context.textColor, backgroundColor: context.buttonColor}} ref={this.searchInput}/>
-            <button style={{color: context.textColor, backgroundColor: context.buttonColor}} onClick={this.searchButtonClickHandler}>search</button>
-            <BooksTable ref={this.booksTable} sendDataUp={this.getBooksData}/>
+            <input onChange={this.inputChangeHandler} placeholder='search' title='search'
+                   style={{color: context.textColor, backgroundColor: context.buttonColor}} ref={this.searchInput}/>
+            {tableView}
           </React.Fragment>
         )}
       </ThemeContext.Consumer>
     );
   }
 
-  getBooksData = (data) => {
-    this.setState({data});
-  };
+  inputChangeHandler = (event) => {
+    if (event.target.value === '') {
+      this.setState({isSearchView: false});
+    } else {
+      this.setState({isSearchView: true});
+    }
 
-  searchButtonClickHandler = () => {
-    let result;
     const searchText = this.searchInput.current.value;
 
-    result = getSearchResult(this.state.data, searchText);
+    const result = getSearchResult(this.state.data, searchText);
 
-    console.log(result);
-    //this.booksTable('bookTable').setState({a:1});
+    this.setState({searchData: result});
+  };
+
+  getBooksData = (data) => {
+    this.setState({data});
   };
 }
