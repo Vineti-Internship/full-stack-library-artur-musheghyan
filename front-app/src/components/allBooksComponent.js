@@ -25,7 +25,7 @@ export class AllBookComponent extends React.Component {
     if (this.state.isSearchView == true) {
       tableView = <SearchTable data={this.state.searchData}/>;
     } else {
-      tableView = <BooksTable ref={this.booksTable} sendDataUp={this.getBooksData}/>;
+      tableView = <BooksTable ref ={this.booksTable} sendDataUp={this.getBooksData}/>;
     }
 
     return (

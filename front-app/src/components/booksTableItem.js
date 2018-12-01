@@ -15,7 +15,7 @@ export class BooksTableItem extends React.Component {
             <li>{this.props.data.language}</li>
             <li>{this.props.data.genre}</li>
             <li>{this.props.data.rating}</li>
-            <button style={{color: context.textColor, backgroundColor: context.buttonColor}} onClick={this.deleteClickHandler}>Delete</button>
+            <button style={{color: context.warningColor, backgroundColor: context.buttonColor}} onClick={this.deleteClickHandler}>Delete</button>
             <button style={{color: context.textColor, backgroundColor: context.buttonColor}} onClick={this.editClickHandler}>Edit</button>
           </ul>
         )}
