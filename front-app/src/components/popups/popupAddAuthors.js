@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 import {dataLoader} from "../../utils/api";
 import {ThemeContext} from "../../context/theme_context";
 
+const addBookForm = React.createRef();
+
 export const showAddAuthorPopup = () => {
   ReactDOM.render(<PopupAddAuthor/>, document.getElementById('popupContainer'));
 };
@@ -15,7 +17,7 @@ const PopupAddAuthor = () => {
           <div style={{backgroundColor: context.colorA}} className="popup-content">
             <h2>Add Book</h2>
 
-            <form id='addBookForm'>
+            <form ref={addBookForm}>
               Name <input style={{color: context.textColor, backgroundColor: context.buttonColor}} type="text"
                           name="name"/><br/>
               Nationality <input style={{color: context.textColor, backgroundColor: context.buttonColor}} type="text"
@@ -37,7 +39,7 @@ const PopupAddAuthor = () => {
 
 
 const addAuthorClickHandler = () => {
-  const elems = document.getElementById('addBookForm').elements;
+  const elems = addBookForm.current.elements;
 
   const data = {
     name: elems.name.value,

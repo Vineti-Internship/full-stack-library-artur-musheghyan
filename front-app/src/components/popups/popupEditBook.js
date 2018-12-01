@@ -4,6 +4,7 @@ import {dataLoader} from "../../utils/api";
 import {ThemeContext} from "../../context/theme_context";
 
 let bookId;
+const editBookForm = React.createRef();
 
 export const showEditBookPopup = (id) => {
   bookId = id;
@@ -19,7 +20,7 @@ const PopupEditBook = () => {
           <div style={{backgroundColor: context.colorA}} className="popup-content">
             <h2>Edit Book</h2>
 
-            <form id='editBookForm'>
+            <form ref={editBookForm}>
               Title <input style={{color: context.textColor, backgroundColor: context.buttonColor}} type="text"
                            name="title"/><br/>
               Language <input style={{color: context.textColor, backgroundColor: context.buttonColor}} type="text"
@@ -47,7 +48,7 @@ const PopupEditBook = () => {
 };
 
 const addBookClickHandler = () => {
-  const elems = document.getElementById('editBookForm').elements;
+  const elems = editBookForm.current.elements;
 
   const data = {
     title: elems.title.value,
