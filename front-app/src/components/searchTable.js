@@ -3,11 +3,9 @@ import {BooksTableItem} from "./booksTableItem";
 import {ThemeContext} from "../context/theme_context";
 
 export const SearchTable = (props) => {
-  let view;
+  const listItems = initTableItems(props.data);
 
-  let listItems = initTableItems(props.data);
-
-  view = <ul>{listItems}</ul>;
+  const view = <ul>{listItems}</ul>;
 
   return (<ThemeContext.Consumer>
     {context => (
